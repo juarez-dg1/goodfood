@@ -1,0 +1,1529 @@
+--
+-- PostgreSQL database dump
+--
+
+\restrict CV8LiLqTgYhGNfnJzwQPCDF3otoNdRbE33gGGeIIGSVc31xF2AyNMlHV7cF5rOc
+
+-- Dumped from database version 18.3
+-- Dumped by pg_dump version 18.3
+
+-- Started on 2026-11-18 22:48:14
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 239 (class 1255 OID 16863)
+-- Name: actualizar_alergia(integer, character varying, character varying); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.actualizar_alergia(IN p_id_alergia integer, IN p_nombre_alergia character varying, IN p_descripcion character varying)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    UPDATE alergia SET
+        nombre_alergia  = p_nombre_alergia ,
+        descripcion = p_descripcion
+    WHERE id_alergia = p_id_alergia;
+END;
+$$;
+
+
+ALTER PROCEDURE public.actualizar_alergia(IN p_id_alergia integer, IN p_nombre_alergia character varying, IN p_descripcion character varying) OWNER TO postgres;
+
+--
+-- TOC entry 254 (class 1255 OID 24809)
+-- Name: actualizar_alergias(integer, character varying, character varying); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.actualizar_alergias(IN p_id_alergia integer, IN p_nombre_alergia character varying, IN p_descripcion character varying)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    UPDATE alergia SET
+        nombre_alergia  = p_nombre_alergia ,
+        descripcion = p_descripcion
+    WHERE id_alergia = p_id_alergia;
+END;
+$$;
+
+
+ALTER PROCEDURE public.actualizar_alergias(IN p_id_alergia integer, IN p_nombre_alergia character varying, IN p_descripcion character varying) OWNER TO postgres;
+
+--
+-- TOC entry 247 (class 1255 OID 24785)
+-- Name: actualizar_categoria(integer, character varying); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.actualizar_categoria(IN p_id_categoria integer, IN p_nombre_categoria character varying)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    UPDATE CATEGORIA_RECETA 
+    SET nombre_categoria = p_nombre_categoria
+    WHERE id_categoria = p_id_categoria;
+END;
+$$;
+
+
+ALTER PROCEDURE public.actualizar_categoria(IN p_id_categoria integer, IN p_nombre_categoria character varying) OWNER TO postgres;
+
+--
+-- TOC entry 243 (class 1255 OID 16867)
+-- Name: actualizar_detalle_plan(integer, integer, integer, character varying, character varying); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.actualizar_detalle_plan(IN p_id_detalle integer, IN p_id_plan integer, IN p_id_receta integer, IN p_dia_semana character varying, IN p_tipo_comida character varying)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    UPDATE detalle_plan SET
+        id_plan = p_id_plan,
+		id_receta = p_id_receta,
+		dia_semana = p_dia_semana,
+		tipo_comida = p_tipo_comida
+    WHERE id_detalle = p_id_detalle;
+END;
+$$;
+
+
+ALTER PROCEDURE public.actualizar_detalle_plan(IN p_id_detalle integer, IN p_id_plan integer, IN p_id_receta integer, IN p_dia_semana character varying, IN p_tipo_comida character varying) OWNER TO postgres;
+
+--
+-- TOC entry 256 (class 1255 OID 24811)
+-- Name: actualizar_detalleplan(integer, integer, integer, character varying, character varying); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.actualizar_detalleplan(IN p_id_detalle integer, IN p_id_plan integer, IN p_id_receta integer, IN p_dia_semana character varying, IN p_tipo_comida character varying)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    UPDATE detalle_plan SET
+        id_plan  = p_id_plan ,
+        id_receta = p_id_receta,
+        dia_semana = p_dia_semana,
+        tipo_comida = p_tipo_comida
+    WHERE id_detalle = p_id_detalle;
+END;
+$$;
+
+
+ALTER PROCEDURE public.actualizar_detalleplan(IN p_id_detalle integer, IN p_id_plan integer, IN p_id_receta integer, IN p_dia_semana character varying, IN p_tipo_comida character varying) OWNER TO postgres;
+
+--
+-- TOC entry 285 (class 1255 OID 24795)
+-- Name: actualizar_dieta(integer, character varying, character varying); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.actualizar_dieta(IN p_id_dieta integer, IN p_nombre_dieta character varying, IN p_descripcion character varying DEFAULT NULL::character varying)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    UPDATE DIETA
+    SET nombre_dieta = p_nombre_dieta,
+        descripcion = p_descripcion
+    WHERE id_dieta = p_id_dieta;
+END;
+$$;
+
+
+ALTER PROCEDURE public.actualizar_dieta(IN p_id_dieta integer, IN p_nombre_dieta character varying, IN p_descripcion character varying) OWNER TO postgres;
+
+--
+-- TOC entry 289 (class 1255 OID 24799)
+-- Name: actualizar_ingrediente(integer, character varying, numeric, character varying, numeric, integer); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.actualizar_ingrediente(IN p_id_ingrediente integer, IN p_nombre_ingrediente character varying, IN p_cantidad numeric DEFAULT NULL::numeric, IN p_unidad_medida character varying DEFAULT NULL::character varying, IN p_precio_promedio numeric DEFAULT NULL::numeric, IN p_calorias_por_unidad integer DEFAULT NULL::integer)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    UPDATE INGREDIENTE
+    SET nombre_ingrediente = p_nombre_ingrediente,
+        cantidad = p_cantidad,
+        unidad_medida = p_unidad_medida,
+        precio_promedio = p_precio_promedio,
+        calorias_por_unidad = p_calorias_por_unidad
+    WHERE id_ingrediente = p_id_ingrediente;
+END;
+$$;
+
+
+ALTER PROCEDURE public.actualizar_ingrediente(IN p_id_ingrediente integer, IN p_nombre_ingrediente character varying, IN p_cantidad numeric, IN p_unidad_medida character varying, IN p_precio_promedio numeric, IN p_calorias_por_unidad integer) OWNER TO postgres;
+
+--
+-- TOC entry 295 (class 1255 OID 33180)
+-- Name: actualizar_ingrediente_organico(integer, character varying, numeric, character varying, numeric, integer, character varying, character varying); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.actualizar_ingrediente_organico(IN p_id_ingrediente integer, IN p_nombre_ingrediente character varying, IN p_cantidad numeric, IN p_unidad_medida character varying, IN p_precio_promedio numeric, IN p_calorias_por_unidad integer, IN p_certificacion character varying, IN p_origen character varying)
+    LANGUAGE plpgsql
+    AS $$
+begin
+    update only ingrediente_organico
+    set nombre_ingrediente = p_nombre_ingrediente,
+        cantidad = p_cantidad,
+        unidad_medida = p_unidad_medida,
+        precio_promedio = p_precio_promedio,
+        calorias_por_unidad = p_calorias_por_unidad,
+        certificacion = p_certificacion,
+        origen = p_origen
+    where id_ingrediente = p_id_ingrediente;
+end;
+$$;
+
+
+ALTER PROCEDURE public.actualizar_ingrediente_organico(IN p_id_ingrediente integer, IN p_nombre_ingrediente character varying, IN p_cantidad numeric, IN p_unidad_medida character varying, IN p_precio_promedio numeric, IN p_calorias_por_unidad integer, IN p_certificacion character varying, IN p_origen character varying) OWNER TO postgres;
+
+--
+-- TOC entry 248 (class 1255 OID 24803)
+-- Name: actualizar_plan_alimentacion(integer, integer, date, date, numeric); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.actualizar_plan_alimentacion(IN p_id_plan integer, IN p_id_usuario integer, IN p_fecha_inicio date, IN p_fecha_fin date, IN p_costo_total numeric)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    UPDATE PLAN_ALIMENTACION
+    SET id_usuario = p_id_usuario,
+        fecha_inicio = p_fecha_inicio,
+        fecha_fin = p_fecha_fin,
+        costo_total = p_costo_total
+    WHERE id_plan = p_id_plan;
+END;
+$$;
+
+
+ALTER PROCEDURE public.actualizar_plan_alimentacion(IN p_id_plan integer, IN p_id_usuario integer, IN p_fecha_inicio date, IN p_fecha_fin date, IN p_costo_total numeric) OWNER TO postgres;
+
+--
+-- TOC entry 276 (class 1255 OID 24787)
+-- Name: actualizar_receta(integer, character varying, character varying, integer, integer, numeric, integer, character varying, character varying); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.actualizar_receta(IN p_id_receta integer, IN p_nombre_receta character varying, IN p_instrucciones character varying DEFAULT NULL::character varying, IN p_tiempo_preparacion integer DEFAULT NULL::integer, IN p_porciones integer DEFAULT NULL::integer, IN p_costo_aproximado numeric DEFAULT NULL::numeric, IN p_calorias_por_porcion integer DEFAULT NULL::integer, IN p_dificultad character varying DEFAULT NULL::character varying, IN p_imagen_url character varying DEFAULT NULL::character varying)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    UPDATE RECETA
+    SET nombre_receta = p_nombre_receta,
+        instrucciones = p_instrucciones,
+        tiempo_preparacion = p_tiempo_preparacion,
+        porciones = p_porciones,
+        costo_aproximado = p_costo_aproximado,
+        calorias_por_porcion = p_calorias_por_porcion,
+        dificultad = p_dificultad,
+        imagen_url = p_imagen_url
+    WHERE id_receta = p_id_receta;
+END;
+$$;
+
+
+ALTER PROCEDURE public.actualizar_receta(IN p_id_receta integer, IN p_nombre_receta character varying, IN p_instrucciones character varying, IN p_tiempo_preparacion integer, IN p_porciones integer, IN p_costo_aproximado numeric, IN p_calorias_por_porcion integer, IN p_dificultad character varying, IN p_imagen_url character varying) OWNER TO postgres;
+
+--
+-- TOC entry 281 (class 1255 OID 24791)
+-- Name: actualizar_usuario(integer, character varying, character varying, date, numeric, numeric, numeric); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.actualizar_usuario(IN p_id_usuario integer, IN p_nombre character varying, IN p_email character varying, IN p_fecha_nacimiento date DEFAULT NULL::date, IN p_peso numeric DEFAULT NULL::numeric, IN p_estatura numeric DEFAULT NULL::numeric, IN p_presupuesto_semanal numeric DEFAULT NULL::numeric)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    UPDATE USUARIO
+    SET nombre = p_nombre,
+        email = p_email,
+        fecha_nacimiento = p_fecha_nacimiento,
+        peso = p_peso,
+        estatura = p_estatura,
+        presupuesto_semanal = p_presupuesto_semanal
+    WHERE id_usuario = p_id_usuario;
+END;
+$$;
+
+
+ALTER PROCEDURE public.actualizar_usuario(IN p_id_usuario integer, IN p_nombre character varying, IN p_email character varying, IN p_fecha_nacimiento date, IN p_peso numeric, IN p_estatura numeric, IN p_presupuesto_semanal numeric) OWNER TO postgres;
+
+--
+-- TOC entry 264 (class 1255 OID 33172)
+-- Name: actualizar_usuario_gratuito(integer, character varying, character varying, numeric, numeric, numeric, integer); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.actualizar_usuario_gratuito(IN p_id_usuario integer, IN p_nombre character varying, IN p_email character varying, IN p_peso numeric, IN p_estatura numeric, IN p_presupuesto_semanal numeric, IN p_limite_planes integer)
+    LANGUAGE plpgsql
+    AS $$
+begin
+    update only usuario_gratuito
+    set nombre = p_nombre, email = p_email, peso = p_peso,
+        estatura = p_estatura, presupuesto_semanal = p_presupuesto_semanal,
+        limite_planes = p_limite_planes
+    where id_usuario = p_id_usuario;
+end;
+$$;
+
+
+ALTER PROCEDURE public.actualizar_usuario_gratuito(IN p_id_usuario integer, IN p_nombre character varying, IN p_email character varying, IN p_peso numeric, IN p_estatura numeric, IN p_presupuesto_semanal numeric, IN p_limite_planes integer) OWNER TO postgres;
+
+--
+-- TOC entry 280 (class 1255 OID 33176)
+-- Name: actualizar_usuario_premium(integer, character varying, character varying, numeric, numeric, numeric, character varying, numeric); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.actualizar_usuario_premium(IN p_id_usuario integer, IN p_nombre character varying, IN p_email character varying, IN p_peso numeric, IN p_estatura numeric, IN p_presupuesto_semanal numeric, IN p_tipo_membresia character varying, IN p_descuento numeric)
+    LANGUAGE plpgsql
+    AS $$
+begin
+    update only usuario_premium
+    set nombre = p_nombre, email = p_email, peso = p_peso,
+        estatura = p_estatura, presupuesto_semanal = p_presupuesto_semanal,
+        tipo_membresia = p_tipo_membresia, descuento = p_descuento
+    where id_usuario = p_id_usuario;
+end;
+$$;
+
+
+ALTER PROCEDURE public.actualizar_usuario_premium(IN p_id_usuario integer, IN p_nombre character varying, IN p_email character varying, IN p_peso numeric, IN p_estatura numeric, IN p_presupuesto_semanal numeric, IN p_tipo_membresia character varying, IN p_descuento numeric) OWNER TO postgres;
+
+--
+-- TOC entry 235 (class 1255 OID 16860)
+-- Name: eliminar_alergia(character); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.eliminar_alergia(IN p_id_alergia character)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    DELETE FROM alegia
+    WHERE id_alergia = p_id_alergia;
+END;
+$$;
+
+
+ALTER PROCEDURE public.eliminar_alergia(IN p_id_alergia character) OWNER TO postgres;
+
+--
+-- TOC entry 251 (class 1255 OID 24806)
+-- Name: eliminar_alergias(integer); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.eliminar_alergias(IN p_id_alergia integer)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    DELETE FROM alegia
+    WHERE id_alergia = p_id_alergia;
+END;
+$$;
+
+
+ALTER PROCEDURE public.eliminar_alergias(IN p_id_alergia integer) OWNER TO postgres;
+
+--
+-- TOC entry 257 (class 1255 OID 24812)
+-- Name: eliminar_alergiass(integer); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.eliminar_alergiass(IN p_id_alergia integer)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    DELETE FROM alergia
+    WHERE id_alergia = p_id_alergia;
+END;
+$$;
+
+
+ALTER PROCEDURE public.eliminar_alergiass(IN p_id_alergia integer) OWNER TO postgres;
+
+--
+-- TOC entry 245 (class 1255 OID 24783)
+-- Name: eliminar_categoria(integer); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.eliminar_categoria(IN p_id_categoria integer)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    DELETE FROM CATEGORIA_RECETA WHERE id_categoria = p_id_categoria;
+END;
+$$;
+
+
+ALTER PROCEDURE public.eliminar_categoria(IN p_id_categoria integer) OWNER TO postgres;
+
+--
+-- TOC entry 240 (class 1255 OID 16864)
+-- Name: eliminar_detalle_plan(character); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.eliminar_detalle_plan(IN p_id_detalle character)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    DELETE FROM detalle_plan
+    WHERE id_detalle = p_id_detalle;
+END;
+$$;
+
+
+ALTER PROCEDURE public.eliminar_detalle_plan(IN p_id_detalle character) OWNER TO postgres;
+
+--
+-- TOC entry 286 (class 1255 OID 24796)
+-- Name: eliminar_dieta(integer); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.eliminar_dieta(IN p_id_dieta integer)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    DELETE FROM DIETA WHERE id_dieta = p_id_dieta;
+END;
+$$;
+
+
+ALTER PROCEDURE public.eliminar_dieta(IN p_id_dieta integer) OWNER TO postgres;
+
+--
+-- TOC entry 290 (class 1255 OID 24800)
+-- Name: eliminar_ingrediente(integer); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.eliminar_ingrediente(IN p_id_ingrediente integer)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    DELETE FROM INGREDIENTE WHERE id_ingrediente = p_id_ingrediente;
+END;
+$$;
+
+
+ALTER PROCEDURE public.eliminar_ingrediente(IN p_id_ingrediente integer) OWNER TO postgres;
+
+--
+-- TOC entry 296 (class 1255 OID 33181)
+-- Name: eliminar_ingrediente_organico(integer); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.eliminar_ingrediente_organico(IN p_id_ingrediente integer)
+    LANGUAGE plpgsql
+    AS $$
+begin
+    delete from only ingrediente_organico
+    where id_ingrediente = p_id_ingrediente;
+end;
+$$;
+
+
+ALTER PROCEDURE public.eliminar_ingrediente_organico(IN p_id_ingrediente integer) OWNER TO postgres;
+
+--
+-- TOC entry 249 (class 1255 OID 24804)
+-- Name: eliminar_plan_alimentacion(integer); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.eliminar_plan_alimentacion(IN p_id_plan integer)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    DELETE FROM PLAN_ALIMENTACION WHERE id_plan = p_id_plan;
+END;
+$$;
+
+
+ALTER PROCEDURE public.eliminar_plan_alimentacion(IN p_id_plan integer) OWNER TO postgres;
+
+--
+-- TOC entry 277 (class 1255 OID 24788)
+-- Name: eliminar_receta(integer); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.eliminar_receta(IN p_id_receta integer)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    DELETE FROM RECETA WHERE id_receta = p_id_receta;
+END;
+$$;
+
+
+ALTER PROCEDURE public.eliminar_receta(IN p_id_receta integer) OWNER TO postgres;
+
+--
+-- TOC entry 282 (class 1255 OID 24792)
+-- Name: eliminar_usuario(integer); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.eliminar_usuario(IN p_id_usuario integer)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    DELETE FROM USUARIO WHERE id_usuario = p_id_usuario;
+END;
+$$;
+
+
+ALTER PROCEDURE public.eliminar_usuario(IN p_id_usuario integer) OWNER TO postgres;
+
+--
+-- TOC entry 265 (class 1255 OID 33173)
+-- Name: eliminar_usuario_gratuito(integer); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.eliminar_usuario_gratuito(IN p_id_usuario integer)
+    LANGUAGE plpgsql
+    AS $$
+begin
+    delete from only usuario_gratuito
+    where id_usuario = p_id_usuario;
+end;
+$$;
+
+
+ALTER PROCEDURE public.eliminar_usuario_gratuito(IN p_id_usuario integer) OWNER TO postgres;
+
+--
+-- TOC entry 293 (class 1255 OID 33177)
+-- Name: eliminar_usuario_premium(integer); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.eliminar_usuario_premium(IN p_id_usuario integer)
+    LANGUAGE plpgsql
+    AS $$
+begin
+    delete from only usuario_premium
+    where id_usuario = p_id_usuario;
+end;
+$$;
+
+
+ALTER PROCEDURE public.eliminar_usuario_premium(IN p_id_usuario integer) OWNER TO postgres;
+
+--
+-- TOC entry 258 (class 1255 OID 24813)
+-- Name: eliminardetalleplan(integer); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.eliminardetalleplan(IN p_id_detalle integer)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    DELETE FROM detalle_plan
+    WHERE id_detalle = p_id_detalle;
+END;
+$$;
+
+
+ALTER PROCEDURE public.eliminardetalleplan(IN p_id_detalle integer) OWNER TO postgres;
+
+--
+-- TOC entry 236 (class 1255 OID 16861)
+-- Name: insertar_alergia(integer, character varying, character varying); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.insertar_alergia(IN p_id_alergia integer, IN p_nombre_alergia character varying, IN p_descripcion character varying)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    INSERT INTO alergia(id_alergia, nombre_alergia, descripcion)
+    VALUES(p_id_alergia, p_nombre_alergia, p_descripcion);
+END;
+$$;
+
+
+ALTER PROCEDURE public.insertar_alergia(IN p_id_alergia integer, IN p_nombre_alergia character varying, IN p_descripcion character varying) OWNER TO postgres;
+
+--
+-- TOC entry 252 (class 1255 OID 24807)
+-- Name: insertar_alergias(integer, character varying, character varying); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.insertar_alergias(IN p_id_alergia integer, IN p_nombre_alergia character varying, IN p_descripcion character varying)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    INSERT INTO alergia(id_alergia, nombre_alergia, descripcion)
+    VALUES(p_id_alergia, p_nombre_alergia, p_descripcion);
+END;
+$$;
+
+
+ALTER PROCEDURE public.insertar_alergias(IN p_id_alergia integer, IN p_nombre_alergia character varying, IN p_descripcion character varying) OWNER TO postgres;
+
+--
+-- TOC entry 244 (class 1255 OID 24782)
+-- Name: insertar_categoria(integer, character varying); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.insertar_categoria(IN p_id_categoria integer, IN p_nombre_categoria character varying)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    INSERT INTO CATEGORIA_RECETA(id_categoria, nombre_categoria)
+    VALUES(p_id_categoria, p_nombre_categoria);
+END;
+$$;
+
+
+ALTER PROCEDURE public.insertar_categoria(IN p_id_categoria integer, IN p_nombre_categoria character varying) OWNER TO postgres;
+
+--
+-- TOC entry 241 (class 1255 OID 16865)
+-- Name: insertar_detalle_plan(integer, integer, integer, character varying, character varying); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.insertar_detalle_plan(IN p_id_detalle integer, IN p_id_plan integer, IN p_id_receta integer, IN p_dia_semana character varying, IN p_tipo_comida character varying)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    INSERT INTO detalle_plan(id_detalle, id_plan, id_receta, dia_semana, tipo_comida)
+    VALUES(p_id_detalle, p_id_plan, p_id_receta,p_dia_semana,p_tipo_comida);
+END;
+$$;
+
+
+ALTER PROCEDURE public.insertar_detalle_plan(IN p_id_detalle integer, IN p_id_plan integer, IN p_id_receta integer, IN p_dia_semana character varying, IN p_tipo_comida character varying) OWNER TO postgres;
+
+--
+-- TOC entry 284 (class 1255 OID 24794)
+-- Name: insertar_dieta(integer, character varying, character varying); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.insertar_dieta(IN p_id_dieta integer, IN p_nombre_dieta character varying, IN p_descripcion character varying DEFAULT NULL::character varying)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    INSERT INTO DIETA (id_dieta, nombre_dieta, descripcion)
+    VALUES (p_id_dieta, p_nombre_dieta, p_descripcion);
+END;
+$$;
+
+
+ALTER PROCEDURE public.insertar_dieta(IN p_id_dieta integer, IN p_nombre_dieta character varying, IN p_descripcion character varying) OWNER TO postgres;
+
+--
+-- TOC entry 288 (class 1255 OID 24798)
+-- Name: insertar_ingrediente(integer, character varying, numeric, character varying, numeric, integer); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.insertar_ingrediente(IN p_id_ingrediente integer, IN p_nombre_ingrediente character varying, IN p_cantidad numeric DEFAULT NULL::numeric, IN p_unidad_medida character varying DEFAULT NULL::character varying, IN p_precio_promedio numeric DEFAULT NULL::numeric, IN p_calorias_por_unidad integer DEFAULT NULL::integer)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    INSERT INTO INGREDIENTE (
+        id_ingrediente, nombre_ingrediente, cantidad,
+        unidad_medida, precio_promedio, calorias_por_unidad
+    )
+    VALUES (
+        p_id_ingrediente, p_nombre_ingrediente, p_cantidad,
+        p_unidad_medida, p_precio_promedio, p_calorias_por_unidad
+    );
+END;
+$$;
+
+
+ALTER PROCEDURE public.insertar_ingrediente(IN p_id_ingrediente integer, IN p_nombre_ingrediente character varying, IN p_cantidad numeric, IN p_unidad_medida character varying, IN p_precio_promedio numeric, IN p_calorias_por_unidad integer) OWNER TO postgres;
+
+--
+-- TOC entry 294 (class 1255 OID 33179)
+-- Name: insertar_ingrediente_organico(integer, character varying, numeric, character varying, numeric, integer, character varying, character varying); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.insertar_ingrediente_organico(IN p_id_ingrediente integer, IN p_nombre_ingrediente character varying, IN p_cantidad numeric, IN p_unidad_medida character varying, IN p_precio_promedio numeric, IN p_calorias_por_unidad integer, IN p_certificacion character varying, IN p_origen character varying)
+    LANGUAGE plpgsql
+    AS $$
+begin
+    insert into ingrediente_organico(id_ingrediente, nombre_ingrediente, cantidad, unidad_medida, precio_promedio, calorias_por_unidad, certificacion, origen)
+    values(p_id_ingrediente, p_nombre_ingrediente, p_cantidad, p_unidad_medida, p_precio_promedio, p_calorias_por_unidad, p_certificacion, p_origen);
+end;
+$$;
+
+
+ALTER PROCEDURE public.insertar_ingrediente_organico(IN p_id_ingrediente integer, IN p_nombre_ingrediente character varying, IN p_cantidad numeric, IN p_unidad_medida character varying, IN p_precio_promedio numeric, IN p_calorias_por_unidad integer, IN p_certificacion character varying, IN p_origen character varying) OWNER TO postgres;
+
+--
+-- TOC entry 292 (class 1255 OID 24802)
+-- Name: insertar_plan_alimentacion(integer, integer, date, date, numeric); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.insertar_plan_alimentacion(IN p_id_plan integer, IN p_id_usuario integer, IN p_fecha_inicio date, IN p_fecha_fin date, IN p_costo_total numeric)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    INSERT INTO PLAN_ALIMENTACION(id_plan, id_usuario, fecha_inicio, fecha_fin, costo_total)
+    VALUES(p_id_plan, p_id_usuario, p_fecha_inicio, p_fecha_fin, p_costo_total);
+END;
+$$;
+
+
+ALTER PROCEDURE public.insertar_plan_alimentacion(IN p_id_plan integer, IN p_id_usuario integer, IN p_fecha_inicio date, IN p_fecha_fin date, IN p_costo_total numeric) OWNER TO postgres;
+
+--
+-- TOC entry 275 (class 1255 OID 24786)
+-- Name: insertar_receta(integer, character varying, character varying, integer, integer, numeric, integer, character varying, character varying); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.insertar_receta(IN p_id_receta integer, IN p_nombre_receta character varying, IN p_instrucciones character varying DEFAULT NULL::character varying, IN p_tiempo_preparacion integer DEFAULT NULL::integer, IN p_porciones integer DEFAULT NULL::integer, IN p_costo_aproximado numeric DEFAULT NULL::numeric, IN p_calorias_por_porcion integer DEFAULT NULL::integer, IN p_dificultad character varying DEFAULT NULL::character varying, IN p_imagen_url character varying DEFAULT NULL::character varying)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    INSERT INTO RECETA (
+        id_receta, nombre_receta, instrucciones, tiempo_preparacion,
+        porciones, costo_aproximado, calorias_por_porcion,
+        dificultad, imagen_url
+    )
+    VALUES (
+        p_id_receta, p_nombre_receta, p_instrucciones, p_tiempo_preparacion,
+        p_porciones, p_costo_aproximado, p_calorias_por_porcion,
+        p_dificultad, p_imagen_url
+    );
+END;
+$$;
+
+
+ALTER PROCEDURE public.insertar_receta(IN p_id_receta integer, IN p_nombre_receta character varying, IN p_instrucciones character varying, IN p_tiempo_preparacion integer, IN p_porciones integer, IN p_costo_aproximado numeric, IN p_calorias_por_porcion integer, IN p_dificultad character varying, IN p_imagen_url character varying) OWNER TO postgres;
+
+--
+-- TOC entry 279 (class 1255 OID 24790)
+-- Name: insertar_usuario(integer, character varying, character varying, date, numeric, numeric, numeric); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.insertar_usuario(IN p_id_usuario integer, IN p_nombre character varying, IN p_email character varying, IN p_fecha_nacimiento date DEFAULT NULL::date, IN p_peso numeric DEFAULT NULL::numeric, IN p_estatura numeric DEFAULT NULL::numeric, IN p_presupuesto_semanal numeric DEFAULT NULL::numeric)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    INSERT INTO USUARIO (
+        id_usuario, nombre, email, fecha_nacimiento,
+        peso, estatura, presupuesto_semanal
+    )
+    VALUES (
+        p_id_usuario, p_nombre, p_email, p_fecha_nacimiento,
+        p_peso, p_estatura, p_presupuesto_semanal
+    );
+END;
+$$;
+
+
+ALTER PROCEDURE public.insertar_usuario(IN p_id_usuario integer, IN p_nombre character varying, IN p_email character varying, IN p_fecha_nacimiento date, IN p_peso numeric, IN p_estatura numeric, IN p_presupuesto_semanal numeric) OWNER TO postgres;
+
+--
+-- TOC entry 259 (class 1255 OID 33171)
+-- Name: insertar_usuario_gratuito(integer, character varying, character varying, date, numeric, numeric, numeric, integer); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.insertar_usuario_gratuito(IN p_id_usuario integer, IN p_nombre character varying, IN p_email character varying, IN p_fecha_nacimiento date, IN p_peso numeric, IN p_estatura numeric, IN p_presupuesto_semanal numeric, IN p_limite_planes integer)
+    LANGUAGE plpgsql
+    AS $$
+begin
+    insert into usuario_gratuito(id_usuario, nombre, email, fecha_nacimiento, peso, estatura, presupuesto_semanal, limite_planes, fecha_registro)
+    values(p_id_usuario, p_nombre, p_email, p_fecha_nacimiento, p_peso, p_estatura, p_presupuesto_semanal, p_limite_planes, current_date);
+end;
+$$;
+
+
+ALTER PROCEDURE public.insertar_usuario_gratuito(IN p_id_usuario integer, IN p_nombre character varying, IN p_email character varying, IN p_fecha_nacimiento date, IN p_peso numeric, IN p_estatura numeric, IN p_presupuesto_semanal numeric, IN p_limite_planes integer) OWNER TO postgres;
+
+--
+-- TOC entry 273 (class 1255 OID 33175)
+-- Name: insertar_usuario_premium(integer, character varying, character varying, date, numeric, numeric, numeric, character varying, numeric); Type: PROCEDURE; Schema: public; Owner: postgres
+--
+
+CREATE PROCEDURE public.insertar_usuario_premium(IN p_id_usuario integer, IN p_nombre character varying, IN p_email character varying, IN p_fecha_nacimiento date, IN p_peso numeric, IN p_estatura numeric, IN p_presupuesto_semanal numeric, IN p_tipo_membresia character varying, IN p_descuento numeric)
+    LANGUAGE plpgsql
+    AS $$
+begin
+    insert into usuario_premium(id_usuario, nombre, email, fecha_nacimiento, peso, estatura, presupuesto_semanal, tipo_membresia, descuento)
+    values(p_id_usuario, p_nombre, p_email, p_fecha_nacimiento, p_peso, p_estatura, p_presupuesto_semanal, p_tipo_membresia, p_descuento);
+end;
+$$;
+
+
+ALTER PROCEDURE public.insertar_usuario_premium(IN p_id_usuario integer, IN p_nombre character varying, IN p_email character varying, IN p_fecha_nacimiento date, IN p_peso numeric, IN p_estatura numeric, IN p_presupuesto_semanal numeric, IN p_tipo_membresia character varying, IN p_descuento numeric) OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 219 (class 1259 OID 16699)
+-- Name: alergia; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.alergia (
+    id_alergia integer NOT NULL,
+    nombre_alergia character varying(50) NOT NULL,
+    descripcion character varying(100) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE public.alergia OWNER TO postgres;
+
+--
+-- TOC entry 238 (class 1255 OID 16862)
+-- Name: leer_alergia(character); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.leer_alergia(p_id_alergia character DEFAULT NULL::bpchar) RETURNS SETOF public.alergia
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF p_id_alergia IS NULL THEN
+        RETURN QUERY SELECT * FROM alergia;
+    ELSE
+        RETURN QUERY SELECT * FROM alergia WHERE id_alergia = p_id_alergia;
+    END IF;
+END;
+$$;
+
+
+ALTER FUNCTION public.leer_alergia(p_id_alergia character) OWNER TO postgres;
+
+--
+-- TOC entry 253 (class 1255 OID 24808)
+-- Name: leer_alergias(integer); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.leer_alergias(p_id_alergia integer DEFAULT NULL::integer) RETURNS SETOF public.alergia
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF p_id_alergia IS NULL THEN
+        RETURN QUERY SELECT * FROM alergia;
+    ELSE
+        RETURN QUERY SELECT * FROM alergia WHERE id_alergia = p_id_alergia;
+    END IF;
+END;
+$$;
+
+
+ALTER FUNCTION public.leer_alergias(p_id_alergia integer) OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 16707)
+-- Name: categoria_receta; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.categoria_receta (
+    id_categoria integer NOT NULL,
+    nombre_categoria character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.categoria_receta OWNER TO postgres;
+
+--
+-- TOC entry 246 (class 1255 OID 24784)
+-- Name: leer_categoria(integer); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.leer_categoria(p_id_categoria integer DEFAULT NULL::integer) RETURNS SETOF public.categoria_receta
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF p_id_categoria IS NULL THEN
+        RETURN QUERY SELECT * FROM CATEGORIA_RECETA;
+    ELSE
+        RETURN QUERY SELECT * FROM CATEGORIA_RECETA WHERE id_categoria = p_id_categoria;
+    END IF;
+END;
+$$;
+
+
+ALTER FUNCTION public.leer_categoria(p_id_categoria integer) OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 16714)
+-- Name: detalle_plan; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.detalle_plan (
+    id_detalle integer NOT NULL,
+    id_plan integer NOT NULL,
+    id_receta integer NOT NULL,
+    dia_semana character varying(15) NOT NULL,
+    tipo_comida character varying(20) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE public.detalle_plan OWNER TO postgres;
+
+--
+-- TOC entry 242 (class 1255 OID 16866)
+-- Name: leer_detalle_plan(character); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.leer_detalle_plan(p_id_detalle character DEFAULT NULL::bpchar) RETURNS SETOF public.detalle_plan
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF p_id_detalle IS NULL THEN
+        RETURN QUERY SELECT * FROM detalle_plan;
+    ELSE
+        RETURN QUERY SELECT * FROM detalle_plan WHERE id_detalle = p_id_detalle;
+    END IF;
+END;
+$$;
+
+
+ALTER FUNCTION public.leer_detalle_plan(p_id_detalle character) OWNER TO postgres;
+
+--
+-- TOC entry 255 (class 1255 OID 24810)
+-- Name: leer_detalleplan(integer); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.leer_detalleplan(p_id_detalle integer DEFAULT NULL::integer) RETURNS SETOF public.detalle_plan
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF p_id_detalle IS NULL THEN
+        RETURN QUERY SELECT * FROM detalle_plan;
+    ELSE
+        RETURN QUERY SELECT * FROM detalle_plan WHERE id_detalle = p_id_detalle;
+    END IF;
+END;
+$$;
+
+
+ALTER FUNCTION public.leer_detalleplan(p_id_detalle integer) OWNER TO postgres;
+
+--
+-- TOC entry 222 (class 1259 OID 16724)
+-- Name: dieta; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.dieta (
+    id_dieta integer NOT NULL,
+    nombre_dieta character varying(50) NOT NULL,
+    descripcion character varying(100) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE public.dieta OWNER TO postgres;
+
+--
+-- TOC entry 287 (class 1255 OID 24797)
+-- Name: leer_dieta(integer); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.leer_dieta(p_id_dieta integer DEFAULT NULL::integer) RETURNS SETOF public.dieta
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF p_id_dieta IS NULL THEN
+        RETURN QUERY SELECT * FROM DIETA;
+    ELSE
+        RETURN QUERY SELECT * FROM DIETA WHERE id_dieta = p_id_dieta;
+    END IF;
+END;
+$$;
+
+
+ALTER FUNCTION public.leer_dieta(p_id_dieta integer) OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 16732)
+-- Name: ingrediente; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.ingrediente (
+    id_ingrediente integer NOT NULL,
+    nombre_ingrediente character varying(100) NOT NULL,
+    cantidad numeric(8,2) DEFAULT NULL::numeric,
+    unidad_medida character varying(20) DEFAULT NULL::character varying,
+    precio_promedio numeric(8,2) DEFAULT NULL::numeric,
+    calorias_por_unidad integer
+);
+
+
+ALTER TABLE public.ingrediente OWNER TO postgres;
+
+--
+-- TOC entry 291 (class 1255 OID 24801)
+-- Name: leer_ingrediente(integer); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.leer_ingrediente(p_id_ingrediente integer DEFAULT NULL::integer) RETURNS SETOF public.ingrediente
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF p_id_ingrediente IS NULL THEN
+        RETURN QUERY SELECT * FROM INGREDIENTE;
+    ELSE
+        RETURN QUERY SELECT * FROM INGREDIENTE WHERE id_ingrediente = p_id_ingrediente;
+    END IF;
+END;
+$$;
+
+
+ALTER FUNCTION public.leer_ingrediente(p_id_ingrediente integer) OWNER TO postgres;
+
+--
+-- TOC entry 232 (class 1259 OID 33026)
+-- Name: ingrediente_organico; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.ingrediente_organico (
+    certificacion character varying(50),
+    origen character varying(50)
+)
+INHERITS (public.ingrediente);
+
+
+ALTER TABLE public.ingrediente_organico OWNER TO postgres;
+
+--
+-- TOC entry 297 (class 1255 OID 33182)
+-- Name: leer_ingrediente_organico(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.leer_ingrediente_organico() RETURNS SETOF public.ingrediente_organico
+    LANGUAGE plpgsql
+    AS $$
+begin
+    return query select * from only ingrediente_organico;
+end;
+$$;
+
+
+ALTER FUNCTION public.leer_ingrediente_organico() OWNER TO postgres;
+
+--
+-- TOC entry 224 (class 1259 OID 16742)
+-- Name: plan_alimentacion; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.plan_alimentacion (
+    id_plan integer NOT NULL,
+    id_usuario integer NOT NULL,
+    fecha_inicio date NOT NULL,
+    fecha_fin date,
+    costo_total numeric(6,2) DEFAULT NULL::numeric
+);
+
+
+ALTER TABLE public.plan_alimentacion OWNER TO postgres;
+
+--
+-- TOC entry 250 (class 1255 OID 24805)
+-- Name: leer_plan_alimentacion(integer); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.leer_plan_alimentacion(p_id_plan integer DEFAULT NULL::integer) RETURNS SETOF public.plan_alimentacion
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF p_id_plan IS NULL THEN
+        RETURN QUERY SELECT * FROM PLAN_ALIMENTACION;
+    ELSE
+        RETURN QUERY SELECT * FROM PLAN_ALIMENTACION WHERE id_plan = p_id_plan;
+    END IF;
+END;
+$$;
+
+
+ALTER FUNCTION public.leer_plan_alimentacion(p_id_plan integer) OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 16751)
+-- Name: receta; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.receta (
+    id_receta integer NOT NULL,
+    nombre_receta character varying(50) NOT NULL,
+    instrucciones character varying(500) DEFAULT NULL::character varying,
+    tiempo_preparacion integer,
+    porciones integer,
+    costo_aproximado numeric(6,2) DEFAULT NULL::numeric,
+    calorias_por_porcion integer,
+    dificultad character varying(20) DEFAULT NULL::character varying,
+    imagen_url character varying(255) DEFAULT NULL::character varying
+);
+
+
+ALTER TABLE public.receta OWNER TO postgres;
+
+--
+-- TOC entry 278 (class 1255 OID 24789)
+-- Name: leer_receta(integer); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.leer_receta(p_id_receta integer DEFAULT NULL::integer) RETURNS SETOF public.receta
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF p_id_receta IS NULL THEN
+        RETURN QUERY SELECT * FROM RECETA;
+    ELSE
+        RETURN QUERY SELECT * FROM RECETA WHERE id_receta = p_id_receta;
+    END IF;
+END;
+$$;
+
+
+ALTER FUNCTION public.leer_receta(p_id_receta integer) OWNER TO postgres;
+
+--
+-- TOC entry 228 (class 1259 OID 16779)
+-- Name: usuario; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.usuario (
+    id_usuario integer NOT NULL,
+    nombre character varying(20) NOT NULL,
+    email character varying(60) NOT NULL,
+    fecha_nacimiento date,
+    peso numeric(5,2) DEFAULT NULL::numeric,
+    estatura numeric(5,2) DEFAULT NULL::numeric,
+    presupuesto_semanal numeric(6,2) DEFAULT NULL::numeric
+);
+
+
+ALTER TABLE public.usuario OWNER TO postgres;
+
+--
+-- TOC entry 283 (class 1255 OID 24793)
+-- Name: leer_usuario(integer); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.leer_usuario(p_id_usuario integer DEFAULT NULL::integer) RETURNS SETOF public.usuario
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    IF p_id_usuario IS NULL THEN
+        RETURN QUERY SELECT * FROM USUARIO;
+    ELSE
+        RETURN QUERY SELECT * FROM USUARIO WHERE id_usuario = p_id_usuario;
+    END IF;
+END;
+$$;
+
+
+ALTER FUNCTION public.leer_usuario(p_id_usuario integer) OWNER TO postgres;
+
+--
+-- TOC entry 233 (class 1259 OID 33157)
+-- Name: usuario_gratuito; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.usuario_gratuito (
+    limite_planes integer DEFAULT 3 NOT NULL,
+    fecha_registro date DEFAULT CURRENT_DATE NOT NULL
+)
+INHERITS (public.usuario);
+
+
+ALTER TABLE public.usuario_gratuito OWNER TO postgres;
+
+--
+-- TOC entry 272 (class 1255 OID 33174)
+-- Name: leer_usuario_gratuito(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.leer_usuario_gratuito() RETURNS SETOF public.usuario_gratuito
+    LANGUAGE plpgsql
+    AS $$
+begin
+    return query select * from only usuario_gratuito;
+end;
+$$;
+
+
+ALTER FUNCTION public.leer_usuario_gratuito() OWNER TO postgres;
+
+--
+-- TOC entry 231 (class 1259 OID 33006)
+-- Name: usuario_premium; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.usuario_premium (
+    tipo_membresia character varying(30),
+    descuento numeric(5,2)
+)
+INHERITS (public.usuario);
+
+
+ALTER TABLE public.usuario_premium OWNER TO postgres;
+
+--
+-- TOC entry 237 (class 1255 OID 33178)
+-- Name: leer_usuario_premium(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.leer_usuario_premium() RETURNS SETOF public.usuario_premium
+    LANGUAGE plpgsql
+    AS $$
+begin
+    return query select * from only usuario_premium;
+end;
+$$;
+
+
+ALTER FUNCTION public.leer_usuario_premium() OWNER TO postgres;
+
+--
+-- TOC entry 226 (class 1259 OID 16764)
+-- Name: receta_categoria; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.receta_categoria (
+    id_receta integer NOT NULL,
+    id_categoria integer NOT NULL
+);
+
+
+ALTER TABLE public.receta_categoria OWNER TO postgres;
+
+--
+-- TOC entry 227 (class 1259 OID 16771)
+-- Name: receta_ingrediente; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.receta_ingrediente (
+    id_receta integer NOT NULL,
+    id_ingrediente integer NOT NULL,
+    cantidad numeric(8,2) NOT NULL
+);
+
+
+ALTER TABLE public.receta_ingrediente OWNER TO postgres;
+
+--
+-- TOC entry 229 (class 1259 OID 16790)
+-- Name: usuario_alergia; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.usuario_alergia (
+    id_usuario integer NOT NULL,
+    id_alergia integer NOT NULL
+);
+
+
+ALTER TABLE public.usuario_alergia OWNER TO postgres;
+
+--
+-- TOC entry 230 (class 1259 OID 16797)
+-- Name: usuario_dieta; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.usuario_dieta (
+    id_usuario integer NOT NULL,
+    id_dieta integer NOT NULL,
+    fecha_inicio date NOT NULL
+);
+
+
+ALTER TABLE public.usuario_dieta OWNER TO postgres;
+
+--
+-- TOC entry 234 (class 1259 OID 33170)
+-- Name: usuario_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.usuario_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.usuario_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4981 (class 2604 OID 33029)
+-- Name: ingrediente_organico cantidad; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ingrediente_organico ALTER COLUMN cantidad SET DEFAULT NULL::numeric;
+
+
+--
+-- TOC entry 4982 (class 2604 OID 33030)
+-- Name: ingrediente_organico unidad_medida; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ingrediente_organico ALTER COLUMN unidad_medida SET DEFAULT NULL::character varying;
+
+
+--
+-- TOC entry 4983 (class 2604 OID 33031)
+-- Name: ingrediente_organico precio_promedio; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ingrediente_organico ALTER COLUMN precio_promedio SET DEFAULT NULL::numeric;
+
+
+--
+-- TOC entry 4984 (class 2604 OID 33160)
+-- Name: usuario_gratuito peso; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario_gratuito ALTER COLUMN peso SET DEFAULT NULL::numeric;
+
+
+--
+-- TOC entry 4985 (class 2604 OID 33161)
+-- Name: usuario_gratuito estatura; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario_gratuito ALTER COLUMN estatura SET DEFAULT NULL::numeric;
+
+
+--
+-- TOC entry 4986 (class 2604 OID 33162)
+-- Name: usuario_gratuito presupuesto_semanal; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario_gratuito ALTER COLUMN presupuesto_semanal SET DEFAULT NULL::numeric;
+
+
+--
+-- TOC entry 4978 (class 2604 OID 33009)
+-- Name: usuario_premium peso; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario_premium ALTER COLUMN peso SET DEFAULT NULL::numeric;
+
+
+--
+-- TOC entry 4979 (class 2604 OID 33010)
+-- Name: usuario_premium estatura; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario_premium ALTER COLUMN estatura SET DEFAULT NULL::numeric;
+
+
+--
+-- TOC entry 4980 (class 2604 OID 33011)
+-- Name: usuario_premium presupuesto_semanal; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario_premium ALTER COLUMN presupuesto_semanal SET DEFAULT NULL::numeric;
+
+
+--
+-- TOC entry 4990 (class 2606 OID 16706)
+-- Name: alergia alergia_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.alergia
+    ADD CONSTRAINT alergia_pkey PRIMARY KEY (id_alergia);
+
+
+--
+-- TOC entry 4992 (class 2606 OID 16713)
+-- Name: categoria_receta categoria_receta_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.categoria_receta
+    ADD CONSTRAINT categoria_receta_pkey PRIMARY KEY (id_categoria);
+
+
+--
+-- TOC entry 4994 (class 2606 OID 16723)
+-- Name: detalle_plan detalle_plan_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.detalle_plan
+    ADD CONSTRAINT detalle_plan_pkey PRIMARY KEY (id_detalle);
+
+
+--
+-- TOC entry 4996 (class 2606 OID 16731)
+-- Name: dieta dieta_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.dieta
+    ADD CONSTRAINT dieta_pkey PRIMARY KEY (id_dieta);
+
+
+--
+-- TOC entry 4998 (class 2606 OID 16741)
+-- Name: ingrediente ingrediente_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ingrediente
+    ADD CONSTRAINT ingrediente_pkey PRIMARY KEY (id_ingrediente);
+
+
+--
+-- TOC entry 5000 (class 2606 OID 16750)
+-- Name: plan_alimentacion plan_alimentacion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.plan_alimentacion
+    ADD CONSTRAINT plan_alimentacion_pkey PRIMARY KEY (id_plan);
+
+
+--
+-- TOC entry 5004 (class 2606 OID 16770)
+-- Name: receta_categoria receta_categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.receta_categoria
+    ADD CONSTRAINT receta_categoria_pkey PRIMARY KEY (id_receta, id_categoria);
+
+
+--
+-- TOC entry 5006 (class 2606 OID 16778)
+-- Name: receta_ingrediente receta_ingrediente_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.receta_ingrediente
+    ADD CONSTRAINT receta_ingrediente_pkey PRIMARY KEY (id_receta, id_ingrediente);
+
+
+--
+-- TOC entry 5002 (class 2606 OID 16763)
+-- Name: receta receta_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.receta
+    ADD CONSTRAINT receta_pkey PRIMARY KEY (id_receta);
+
+
+--
+-- TOC entry 5010 (class 2606 OID 16796)
+-- Name: usuario_alergia usuario_alergia_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario_alergia
+    ADD CONSTRAINT usuario_alergia_pkey PRIMARY KEY (id_usuario, id_alergia);
+
+
+--
+-- TOC entry 5012 (class 2606 OID 16804)
+-- Name: usuario_dieta usuario_dieta_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario_dieta
+    ADD CONSTRAINT usuario_dieta_pkey PRIMARY KEY (id_usuario, id_dieta, fecha_inicio);
+
+
+--
+-- TOC entry 5008 (class 2606 OID 16789)
+-- Name: usuario usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario
+    ADD CONSTRAINT usuario_pkey PRIMARY KEY (id_usuario);
+
+
+--
+-- TOC entry 5013 (class 2606 OID 16805)
+-- Name: detalle_plan fk_detalle_plan_plan; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.detalle_plan
+    ADD CONSTRAINT fk_detalle_plan_plan FOREIGN KEY (id_plan) REFERENCES public.plan_alimentacion(id_plan);
+
+
+--
+-- TOC entry 5014 (class 2606 OID 16810)
+-- Name: detalle_plan fk_detalle_plan_receta; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.detalle_plan
+    ADD CONSTRAINT fk_detalle_plan_receta FOREIGN KEY (id_receta) REFERENCES public.receta(id_receta);
+
+
+--
+-- TOC entry 5015 (class 2606 OID 16815)
+-- Name: plan_alimentacion fk_plan_alimentacion_usuario; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.plan_alimentacion
+    ADD CONSTRAINT fk_plan_alimentacion_usuario FOREIGN KEY (id_usuario) REFERENCES public.usuario(id_usuario);
+
+
+--
+-- TOC entry 5016 (class 2606 OID 16820)
+-- Name: receta_categoria fk_receta_categoria_categoria; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.receta_categoria
+    ADD CONSTRAINT fk_receta_categoria_categoria FOREIGN KEY (id_categoria) REFERENCES public.categoria_receta(id_categoria);
+
+
+--
+-- TOC entry 5017 (class 2606 OID 16825)
+-- Name: receta_categoria fk_receta_categoria_receta; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.receta_categoria
+    ADD CONSTRAINT fk_receta_categoria_receta FOREIGN KEY (id_receta) REFERENCES public.receta(id_receta);
+
+
+--
+-- TOC entry 5018 (class 2606 OID 16830)
+-- Name: receta_ingrediente fk_receta_ingrediente_ingrediente; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.receta_ingrediente
+    ADD CONSTRAINT fk_receta_ingrediente_ingrediente FOREIGN KEY (id_ingrediente) REFERENCES public.ingrediente(id_ingrediente);
+
+
+--
+-- TOC entry 5019 (class 2606 OID 16835)
+-- Name: receta_ingrediente fk_receta_ingrediente_receta; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.receta_ingrediente
+    ADD CONSTRAINT fk_receta_ingrediente_receta FOREIGN KEY (id_receta) REFERENCES public.receta(id_receta);
+
+
+--
+-- TOC entry 5020 (class 2606 OID 16840)
+-- Name: usuario_alergia fk_usuario_alergia_alergia; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario_alergia
+    ADD CONSTRAINT fk_usuario_alergia_alergia FOREIGN KEY (id_alergia) REFERENCES public.alergia(id_alergia);
+
+
+--
+-- TOC entry 5021 (class 2606 OID 16845)
+-- Name: usuario_alergia fk_usuario_alergia_usuario; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario_alergia
+    ADD CONSTRAINT fk_usuario_alergia_usuario FOREIGN KEY (id_usuario) REFERENCES public.usuario(id_usuario);
+
+
+--
+-- TOC entry 5022 (class 2606 OID 16850)
+-- Name: usuario_dieta fk_usuario_dieta_dieta; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario_dieta
+    ADD CONSTRAINT fk_usuario_dieta_dieta FOREIGN KEY (id_dieta) REFERENCES public.dieta(id_dieta);
+
+
+--
+-- TOC entry 5023 (class 2606 OID 16855)
+-- Name: usuario_dieta fk_usuario_dieta_usuario; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario_dieta
+    ADD CONSTRAINT fk_usuario_dieta_usuario FOREIGN KEY (id_usuario) REFERENCES public.usuario(id_usuario);
+
+
+-- Completed on 2026-11-18 22:48:14
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict CV8LiLqTgYhGNfnJzwQPCDF3otoNdRbE33gGGeIIGSVc31xF2AyNMlHV7cF5rOc
+
